@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/mock/api/cep/v1/00000000"
+  },
+  "response": {
+    "status": 500,
+    "bodyFileName": "cep_00000000.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

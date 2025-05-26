@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/mock/api/cep/v1/11111111"
+  },
+  "response": {
+    "status": 404,
+    "bodyFileName": "cep_11111111.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
