@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: 'postgres:latest'
+    container_name: moving_pack_db
+    environment:
+      POSTGRES_USER: devuser
+      POSTGRES_PASSWORD: devpass
+      POSTGRES_DB: moving_pack
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - dev-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U devuser"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  wiremock:
+    image: wiremock/wiremock:3.6.0
+    container_name: moving_pack_wiremock
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./src/test/resources/wiremock:/home/wiremock
+    command: ["--global-response-templating"]
+    networks:
+      - dev-net
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: springboot_app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/moving_pack
+      SPRING_DATASOURCE_USERNAME: devuser
+      SPRING_DATASOURCE_PASSWORD: devpass
+      EXTERNAL_API_BASE_URL: http://wiremock:8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      wiremock:
+        condition: service_started
+    networks:
+      - dev-net
+
+volumes:
+  postgres_data:
+
+networks:
+  dev-net:
+    driver: bridge

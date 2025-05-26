@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: 'postgres:latest'
+    container_name: moving_pack_db_local
+    environment:
+      POSTGRES_USER: devuser
+      POSTGRES_PASSWORD: devpass
+      POSTGRES_DB: moving_pack
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  wiremock:
+    image: wiremock/wiremock:3.6.0
+    container_name: moving_pack_wiremock_local
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./src/test/resources/wiremock:/home/wiremock
+    command: ["--global-response-templating"]
+
+volumes:
+  postgres_data:
