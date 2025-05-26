@@ -1,0 +1,11 @@
+spring:
+
+  flyway:
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+
+# external api
+external:
+  api:
+    base-url: http://localhost:8081

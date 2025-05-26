@@ -1,0 +1,24 @@
+# spring application
+spring:
+  application:
+    name: movingpack
+
+  flyway:
+    locations: classpath:db/migration
+    enabled: true
+    baseline-on-migrate: true
+
+# jpa
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+
+# external api
+external:
+  api:
+    base-url: https://real-api.example.com
