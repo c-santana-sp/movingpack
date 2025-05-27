@@ -173,8 +173,8 @@
 				<version>${flyway.version}</version>
 				<configuration>
 					<url>jdbc:postgresql://localhost:5432/moving_pack</url>
-					<user>dbuser</user>
-					<password>dbpass</password>
+					<user>devuser</user>
+					<password>devpass</password>
 					<schemas>
 						<schema>public</schema>
 					</schemas>
