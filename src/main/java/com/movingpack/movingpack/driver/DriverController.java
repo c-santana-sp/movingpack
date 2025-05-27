@@ -28,7 +28,6 @@ public class DriverController {
 
     @GetMapping("/{id}")
     public DriverDto findById(@PathVariable Long id) {
-//        return driverMapper.toDto(driverService.findById(id));
         return driverMapper.toDto(driverService.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
     }
