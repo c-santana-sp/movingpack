@@ -1,7 +1,8 @@
-package com.movingpack.movingpack.delivery;
+package com.movingpack.movingpack.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.movingpack.movingpack.config.TestcontainersConfiguration;
+import com.movingpack.movingpack.delivery.DeliveryDto;
 import com.movingpack.movingpack.driver.DriverRepository;
 import com.movingpack.movingpack.driver.Driver;
 import org.junit.jupiter.api.*;

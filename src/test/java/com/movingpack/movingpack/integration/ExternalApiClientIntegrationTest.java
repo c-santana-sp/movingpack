@@ -1,6 +1,7 @@
-package com.movingpack.movingpack.externalapi;
+package com.movingpack.movingpack.integration;
 
 import com.movingpack.movingpack.config.TestcontainersConfiguration;
+import com.movingpack.movingpack.externalapi.ExternalApiClient;
 import com.movingpack.movingpack.externalapi.dto.ExternalApiCepResult;
 import com.movingpack.movingpack.externalapi.dto.ExternalApiResponse;
 import org.junit.jupiter.api.Test;
