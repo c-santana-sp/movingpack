@@ -34,7 +34,11 @@ A ideia é simular uma **plataforma de entregas**. A aplicação possui:
 | 🐳 **Docker & Docker Compose** | Containerização da aplicação e ambientes locais |
 
 ---
+## 🧭 Arquitetura da Solução
 
+![Arquitetura da Aplicação](./docs/movingpack_solution_diagram.png)
+
+---
 ## 🚀 Como Executar Localmente
 
 ### 1. ✅ Pré-requisitos
