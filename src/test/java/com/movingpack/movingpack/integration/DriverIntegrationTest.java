@@ -3,6 +3,7 @@ package com.movingpack.movingpack.integration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.movingpack.movingpack.config.TestcontainersConfiguration;
 import com.movingpack.movingpack.driver.DriverDto;
+import com.movingpack.movingpack.driver.DriverRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -27,7 +28,15 @@ public class DriverIntegrationTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private DriverRepository driverRepository;
+
     private static Long driverId;
+
+    @BeforeAll
+    static void setupDriver(@Autowired DriverRepository driverRepository) {
+        driverRepository.deleteAll();
+    }
 
     @Test
     @Order(1)
