@@ -55,7 +55,7 @@ A ideia é simular uma **plataforma de entregas**. A aplicação possui:
 ##### 🏠 Ambiente de desenvolvimento local:
 
 ```bash
-docker-compose -f docker-compose.local.yaml up --build
+docker compose -f docker-compose.local.yaml up --build
 ```
 - Sobe:
   - Banco PostgreSQL
@@ -71,7 +71,7 @@ docker-compose -f docker-compose.local.yaml up --build
 
 #### 🧰 Simulação de ambiente produtivo:
 ```bash
-docker-compose -f docker-compose.yaml up --build
+docker compose -f docker-compose.yaml up --build
 ```
 - Sobe:
   - Banco PostgreSQL
@@ -132,9 +132,9 @@ As migrações SQL são automaticamente aplicadas no startup da aplicação.
 Estrutura:
 ```
 src/main/resources/db/migration/
-├── V1__init.sql
-├── V2__create_driver.sql
-├── V3__create_delivery.sql
+├── V1__create table_driver.sql
+├── V2__create_table_delivery.sql
+├── V3__create_table_postal_code_history.sql
 ```
 
 Para executar manualmente:
@@ -149,10 +149,14 @@ Para executar manualmente:
 
 ## 🔗 Endpoints Principais
 
-- `GET /api/v1/driver`
-- `POST /api/v1/driver`
-- `GET /api/v1/delivery`
-- `POST /api/v1/delivery` _(realiza consulta automática de CEP)_
+- `GET /api/v1/drivers`
+  - Listagem de todos os motoristas
+- `POST /api/v1/drivers`
+  - Criação de motoristas
+- `GET /api/v1/deliveries`
+  - Listagem de todas as entregas
+- `POST /api/v1/deliveries` _(realiza consulta automática de CEP)_
+  - Criação de entrega
 - `GET /api/v1/postal-code/consult/{code}` _(consulta manual ao WireMock)_
 
 ---
@@ -161,8 +165,8 @@ Para executar manualmente:
 
 A aplicação simula uma chamada real à API de CEP via:
 
-```
-/api/v1/postal-code/consult/{cep}
+``` 
+/mock/api/cep/v1/{cep}
 ```
 
 O WireMock responde com dados de CEP conforme arquivos `__files` e `mappings` em:
@@ -173,23 +177,37 @@ src/test/resources/wiremock
 
 ---
 
-## 📸 Exemplo de Resposta de Consulta de CEP
+## 📸 Exemplo de Resposta de Consulta de CEP (movingpack)
 
 ```json
 {
   "success": true,
   "data": {
-    "cep": "03255-000",
-    "logradouro": "Rua Exemplo",
-    "bairro": "Centro",
-    "cidade": "São Paulo",
-    "uf": "SP"
+    "cep": "03255000",
+    "state": "SP",
+    "city": "São Paulo",
+    "neighborhood": "Vila Tolstoi",
+    "street": "Rua José Antônio Fontes",
+    "service": "open-cep"
   },
   "status": 200
 }
 ```
 
 ---
+
+## 📸 Exemplo de Resposta para Consulta de CEP via API Externa (mock)
+
+```json
+{
+  "cep": "03258060",
+  "state": "SP",
+  "city": "São Paulo",
+  "neighborhood": "Vila Nova Utinga",
+  "street": "Rua Antônio Mendes",
+  "service": "open-cep"
+}
+```
 
 ## 📚 Conclusão
 
