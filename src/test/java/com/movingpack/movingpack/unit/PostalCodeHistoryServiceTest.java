@@ -32,7 +32,7 @@ public class PostalCodeHistoryServiceTest {
 
     @Test
     void consult_whenSuccess_shouldSaveHistoryAndReturnResponse() {
-        var data = new ExternalApiCepDto("12345-678", "Rua A", "Bairro B", "Cidade C", "Estado D");
+        var data = new ExternalApiCepDto("12345-678", "Estado D", "Cidade C", "Bairro B", "Rua A", "service");
         var success = new ExternalApiCepResult.Success(data);
         var response = new ExternalApiResponse(200, success);
 
